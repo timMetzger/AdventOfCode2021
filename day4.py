@@ -1,6 +1,6 @@
 # Timothy Metzger
 # Advent of Code 2021
-# Day 3
+# Day 4
 
 
 def main():
