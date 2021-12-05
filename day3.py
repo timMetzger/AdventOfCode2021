@@ -38,11 +38,11 @@ def main():
             gamma += "0"
             epsilon += "1"
 
-    part1_answer = int(gamma,2) * int(epsilon,2)
-    print("Part 1: ",part1_answer)
+    part1_answer = int(gamma, 2) * int(epsilon, 2)
+    print("Part 1: ", part1_answer)
 
-    oxygen = find_rating(diagnostics,'oxygen',0)
-    co2 = find_rating(diagnostics,'co2',0)
+    oxygen = find_rating(diagnostics, 'oxygen', 0)
+    co2 = find_rating(diagnostics, 'co2', 0)
 
     oxygen_rating = ""
     co2_rating = ""
@@ -54,20 +54,17 @@ def main():
         for bit in num:
             co2_rating += str(bit)
 
-    part2_answer = int(oxygen_rating,2) * int(co2_rating,2)
+    part2_answer = int(oxygen_rating, 2) * int(co2_rating, 2)
 
-    print("Part 2: ",part2_answer)
-
-
+    print("Part 2: ", part2_answer)
 
 
-
-def find_rating(ratings,type,index):
-    if len(ratings) == 1 :
+def find_rating(ratings, rating_type, index):
+    if len(ratings) == 1:
         return ratings
 
     count = 0
-    if type == 'oxygen':
+    if rating_type == 'oxygen':
         for row in ratings:
             if row[index] > 0:
                 count += 1
@@ -79,9 +76,9 @@ def find_rating(ratings,type,index):
         else:
             ratings = [row for row in ratings if row[index] == 0]
 
-        return find_rating(ratings,type,index+1)
+        return find_rating(ratings, rating_type, index + 1)
 
-    elif type == 'co2':
+    elif rating_type == 'co2':
         for row in ratings:
             if row[index] > 0:
                 count += 1
@@ -93,15 +90,7 @@ def find_rating(ratings,type,index):
         else:
             ratings = [row for row in ratings if row[index] == 1]
 
-        return find_rating(ratings, type, index + 1)
-
-
-
-
-
-
-
-
+        return find_rating(ratings, rating_type, index + 1)
 
 
 if __name__ == "__main__":
