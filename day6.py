@@ -1,6 +1,6 @@
 # Timothy Metzger
 # Advent of Code 2021
-# Day 5
+# Day 6
 
 # import pickle
 from collections import Counter
