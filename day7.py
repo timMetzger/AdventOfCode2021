@@ -21,6 +21,7 @@ def main():
     fuel_cost_2 = 0
     for crab in crabs:
         if crab != alignment_location_2:
+            #This was my solution
             fuel = 0
             n = 1
             if crab < alignment_location_2:
@@ -35,6 +36,11 @@ def main():
                     n += 1
 
             fuel_cost_2 += fuel
+
+            # This is the much simpler solution than using while loops
+            # distance = abs(crab-alignment_location_2)
+            # fuel_cost_2 += sum(range(0,distance+1))
+
 
     print("Part 2: ", fuel_cost_2)
 
