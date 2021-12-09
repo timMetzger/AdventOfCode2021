@@ -12,10 +12,10 @@
 # 8 -> 7
 
 # Part 2:
-# The numbers identified in the out output also indicate which wires need to be on to produce that digit
-# ie. dab -> 8 so wires d, a, and b need to be on
-# sudoku ?
-
+# Ended up doing the common solution of just looking at the similarities between the example
+# I had thought that there wouldn't be hard similarities throughout
+# my solution for the case of no unique similarities was to make a system of equations
+# and solve the system assuming values for the signals and then finding the correct solution there
 
 
 def main():
