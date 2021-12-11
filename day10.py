@@ -1,9 +1,10 @@
 # Timothy Metzger
 # Advent of Code 2021
-# Day 9
+# Day 10
 
 
 from statistics import median
+
 
 def main():
     with open('inputs/day10.txt') as f:
@@ -61,7 +62,7 @@ def main():
             incomplete_line_stack.append(stack)
 
     part1_answer = 0
-    for key,val in close_count.items():
+    for key, val in close_count.items():
         if val > 0:
             part1_answer += syntax_values[key] * val
 
@@ -85,8 +86,8 @@ def main():
 
         line_values.append(get_line_value(to_add))
 
+    print('Part 2: ', median(sorted(line_values)))
 
-    print('Part 2: ',median(sorted(line_values)))
 
 def get_line_value(chars):
     point_table = {
@@ -100,7 +101,6 @@ def get_line_value(chars):
         score = score * 5 + point_table[char]
 
     return score
-
 
 
 if __name__ == "__main__":
