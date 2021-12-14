@@ -52,12 +52,9 @@ def main():
 
 
 
-            for top_row, bottom_row in zip_longest(top,reversed(bottom)):
+            for top_row, bottom_row in zip_longest(top,reversed(bottom),fillvalue=[]):
                 row = []
-                if top_row is None:
-                    top_row = [0] * len(bottom_row)
-                elif bottom_row is None:
-                    bottom_row = [0] * len(top_row)
+
 
 
                 for val1,val2 in zip(top_row,bottom_row):
@@ -77,12 +74,8 @@ def main():
                 left.append(row[:position])
                 right.append(reversed(row[position+1:]))
 
-            for left_row, right_row in zip_longest(left, right):
+            for left_row, right_row in zip_longest(left, right,fillvalue=[]):
                 row = []
-                if left_row is None:
-                    left_row = [0] * len(right_row)
-                elif right_row is None:
-                    right_row = [0] * len(left_row)
 
                 for val1, val2 in zip(left_row, right_row):
                     if val1 or val2 == 1:
