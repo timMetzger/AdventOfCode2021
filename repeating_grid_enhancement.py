@@ -13,7 +13,7 @@ def main():
     # . -> 0
     # # -> 1
 
-    for _ in range(50):
+    for _ in range(2):
         image = enhance(image,alg)
 
     lit_pixels = 0
@@ -48,7 +48,7 @@ def enhance(image,alg):
 
     return output_image
 
-def decode(image, alg, i, j, rows, cols):
+def decode(image, alg, i, j, rows, cols,state):
     # Get neighbors
     # Top row
     # ************
