@@ -5,8 +5,7 @@
 from functools import cache
 from itertools import product
 
-
-
+possible_rolls = list(product([1, 2, 3], repeat=3))
 def main():
     player1_pos = 7
     player2_pos = 4
@@ -66,47 +65,70 @@ def main():
 
     player1_wins = 0
     player2_wins = 0
-    player1_pos = 7
-    player2_pos = 4
+    player1_pos = 4
+    player2_pos = 8
     score1 = 0
     score2 = 0
 
-    x = count_universes(player1_pos,player2_pos,player1_wins,player2_wins,score1,score2,True)
-    # print("Part 2: ",count_universes(pos,score,wins,True))
+    # print("Part 2: ",count_universes(player1_pos,player2_pos,player1_wins,player2_wins,score1,score2,True))
 
+
+# From reddit
+    print(max(dirac_dice(player1_pos, player2_pos, 0, 0)))
 @cache
-def count_universes(pos1,pos2,wins1,wins2,score1,score2,player):
+def dirac_dice(p1, p2, s1, s2):
+    if (s1 >= 21):
+        return (1, 0)
+    if (s2 >= 21):
+        return (0, 1)
 
-    # Terminal state
-    if score1 >= 21 or score2 >= 21:
-        if player:
-            wins1 += 1
-        else:
-            wins2 += 1
+    total_p1_wins = total_p2_wins = 0
 
-    possible_rolls = list(product([1, 2, 3], repeat=3))
-    if player:
-        for roll in possible_rolls:
-            move = sum(roll)
-            if pos1 + move > 10:
-                pos1 = (pos1 + move) % 10
-            else:
-                pos1 += move
-            score1 += pos1
+    for r1, r2, r3 in possible_rolls:
+        new_position = (p1 + r1 + r2 + r3) % 10
+        new_score = s1 + new_position + 1
 
-            count_universes(pos1,pos2,wins1,wins2,score1,score2,False)
-    else:
-        for roll in possible_rolls:
-            move = sum(roll)
-            if pos2 + move > 10:
-                pos2 = (pos2 + move) % 10
-            else:
-                pos2 += move
-            score2 += pos2
+        p2_wins, p1_wins = dirac_dice(p2, new_position, s2, new_score)
 
-            count_universes(pos1,pos2,wins1,wins2,score1,score2, True)
+        total_p1_wins += p1_wins
+        total_p2_wins += p2_wins
 
-    return score1,score2
+    return (total_p1_wins, total_p2_wins)
+
+# My attempt
+# @cache
+# def count_universes(pos1,pos2,wins1,wins2,score1,score2,player):
+#
+#     # Terminal state
+#     if score1 >= 21 or score2 >= 21:
+#         return (1,0) if player else (0,1)
+#
+#     if player:
+#         for roll in possible_rolls:
+#             move = sum(roll)
+#             if pos1 + move > 10:
+#                 pos1 = (pos1 + move) % 10
+#             else:
+#                 pos1 += move
+#             score1 += pos1
+#
+#             wins = count_universes(pos1,pos2,wins1,wins2,score1,score2,False)
+#             wins1 += wins[0]
+#             wins2 += wins[1]
+#     else:
+#         for roll in possible_rolls:
+#             move = sum(roll)
+#             if pos2 + move > 10:
+#                 pos2 = (pos2 + move) % 10
+#             else:
+#                 pos2 += move
+#             score2 += pos2
+#
+#             wins = count_universes(pos1,pos2,wins1,wins2,score1,score2, True)
+#             wins1 += wins[0]
+#             wins2 += wins[1]
+#
+#     return wins1,wins2
 
 if __name__ == "__main__":
     main()
